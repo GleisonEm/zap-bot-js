@@ -1,7 +1,7 @@
-const path = require("path");
-const fs = require("fs");
+const path = require('path');
+const fs = require('fs');
 
-const { WebCache, VersionResolveError } = require("./WebCache");
+const { WebCache, VersionResolveError } = require('./WebCache');
 
 /**
  * LocalWebCache - Fetches a WhatsApp Web version from a local file store
@@ -13,7 +13,7 @@ class LocalWebCache extends WebCache {
     constructor(options = {}) {
         super();
 
-        this.path = options.path || "./.wwebjs_cache/";
+        this.path = options.path || './.wwebjs_cache/';
         this.strict = options.strict || false;
     }
 
@@ -21,12 +21,10 @@ class LocalWebCache extends WebCache {
         const filePath = path.join(this.path, `${version}.html`);
 
         try {
-            return fs.readFileSync(filePath, "utf-8");
-        } catch (err) {
-            if (this.strict)
-                throw new VersionResolveError(
-                    `Couldn't load version ${version} from the cache`,
-                );
+            return fs.readFileSync(filePath, 'utf-8');
+        }
+        catch (err) {
+            if (this.strict) throw new VersionResolveError(`Couldn't load version ${version} from the cache`);
             return null;
         }
     }
